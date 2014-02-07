@@ -1,0 +1,3 @@
+name: ldap-test
+services:
+  ldap-port: harbor
