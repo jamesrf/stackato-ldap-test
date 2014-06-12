@@ -67,7 +67,10 @@ server.bind(SUFFIX, function(req, res, next) {
 
 server.listen(ldap_port, ldap_host, function() {
   console.log('LDAP server listening at %s', server.url);
-  console.log(process.env.STACKATO_SERVICES);
+  if(process.env.STACKATO_SERVICES){
+    console.log("Service info:");
+    console.log(process.env.STACKATO_SERVICES);
+  }
 });
 
 // for Stackato
