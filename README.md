@@ -15,13 +15,13 @@ Server will listen on the given port.  If you are deploying on Stackato, check t
 
 To setup your Stackato instance:
 ```bash
-$ kato config set aok/strategy/ldap/host <host-of-this-server>
-$ kato config set aok/strategy/ldap/host <port-of-this-server>
-$ kato config set aok/strategy/ldap/group_query "(&(objectClass=posixGroup)(memberUid=%{username}))"
-$ kato config set aok/strategy/ldap/group_attribute "cn"
-$ kato config set aok/strategy/ldap/allowed_groups "[\"stackato-admin\",\"stackato-user\"]"
-$ kato config set aok/strategy/ldap/admin_groups "[\"stackato-admin\"]"
-$ kato config set aok/strategy/use "ldap"
+$ kato config set aok strategy/ldap/host <host-of-this-server>
+$ kato config set aok strategy/ldap/port <port-of-this-server>
+$ kato config set aok strategy/ldap/group_query "(&(objectClass=posixGroup)(memberUid=%{username}))"
+$ kato config set aok strategy/ldap/group_attribute "cn"
+$ kato config set aok strategy/ldap/allowed_groups "[\"stackato-admin\",\"stackato-user\"]"
+$ kato config set aok strategy/ldap/admin_groups "[\"stackato-admin\"]"
+$ kato config set aok strategy/use "ldap"
 ```
 
 
