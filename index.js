@@ -65,11 +65,20 @@ server.bind(SUFFIX, function(req, res, next) {
   return next();
 });
 
+var service_info;
+if(process.env.STACKATO_SERVICES){
+  var services = JSON.parse(process.env.STACKATO_SERVICES);
+  service_info = services['ldap-port']['protocol'][0] + 
+      "://" + services['ldap-port']['hostname'] + 
+      ":" + services['ldap-port']['port'];
+}
+
 server.listen(ldap_port, ldap_host, function() {
-  console.log('LDAP server listening at %s', server.url);
-  if(process.env.STACKATO_SERVICES){
-    console.log("Service info:");
-    console.log(process.env.STACKATO_SERVICES);
+  console.log('LDAP server listening at:');
+  if(service_info){
+    console.log(service_info);
+  } else {
+    console.log('LDAP server listening at %s', server.url);
   }
 });
 
@@ -78,7 +87,12 @@ if(process.env.PORT){
   var http_port = parseInt(process.env.PORT);
   var http = require('http');
   http.createServer(function (req, res) {
-    res.writeHead(200);
-    res.end('OK');
+      res.writeHead(200);
+      res.write('LDAP Server OK\n');
+      if(service_info){
+        res.write("LDAP Server:");
+        res.write(service_info);
+      }
+      res.end();
   }).listen(http_port);
 }
